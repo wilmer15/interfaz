@@ -53,7 +53,9 @@ class NewPanel extends JPanel implements ActionListener, MouseListener{
     int y1=10;
     int temp=0;
     int aux=20;
+    int aux2=0;
     int cont=0;
+    int intentos=0;
      Rectangle Carro=this.getBounds();
      Rectangle obstaculo=new Rectangle(200,200,10,10);
     public NewPanel(){
@@ -62,7 +64,7 @@ class NewPanel extends JPanel implements ActionListener, MouseListener{
         this.time.start();
         this.x = 20;
         this.addMouseListener(this);
-        JOptionPane.showMessageDialog(null,"Por favor oprima dos posiciones y memorizelas \n Seguido oprima una casilla para seguir");
+        JOptionPane.showMessageDialog(null,"Por favor oprima dos posiciones  \n Y encuentra las Parejas");
         for(int i=0;i<13;i++){
             posiciones[i]=-1;
         }
@@ -221,55 +223,67 @@ class NewPanel extends JPanel implements ActionListener, MouseListener{
              this.aux++;
         }
         posiciones[cont]=aux;
-        temp++;
         cont++; 
+        temp++;
         
-        if(temp==3){
-           for(int i=0;i<13;i++){
-            posiciones[i]=-1;
-            }
-            JOptionPane.showMessageDialog(null,"Aqui comienza el juego Por favor encuentre los pares de imagenes \n Consecutivamente"); 
-            cont=0;
-        }
+        
         
          int c=cont-2;
          int d=cont-1;
+         
          if((c +1) >=1){
-              
              if(posiciones[c]==1&&posiciones[d]==7){
                JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Coronas");
+               aux2+=2;
              }
              if(posiciones[c]==2&&posiciones[d]==6){
               JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Botellas de Whisky");
+              aux2+=2;
              }
              if(posiciones[c]==4&&posiciones[d]==10){
                JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Botellas de Vodka");
+               aux2+=2;
              }
              if(posiciones[c]==5&&posiciones[d]==8){
                JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Botellas de Ginebra");
+               aux2+=2;
              }    
              
              
              if(posiciones[c]==7&&posiciones[d]==1){
                JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Coronas");
+               aux2+=2;
              }
              if(posiciones[c]==6&&posiciones[d]==2){
               JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Botellas de Whisky");
+              aux2+=2;
              }
              if(posiciones[c]==10&&posiciones[d]==4){
                JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Botellas de Vodka");
+               aux2+=2;
              }
              if(posiciones[c]==8&&posiciones[d]==5){
                JOptionPane.showMessageDialog(null,"Felicitaciones Acerto + 2 Botellas de Ginebra");
+               aux2+=2;
              }  
         } 
-        if(cont==12){
-            cont=0;
-            for(int i=0;i<13;i++){
-            posiciones[i]=-1;
+         if(temp==2){
+            for(int i=aux2;i<13;i++){
+                posiciones[i]=-1;
             }
             temp=0;
-            JOptionPane.showMessageDialog(null,"Por favor oprima dos posiciones y memorizelas \n Seguido oprima una casilla para seguir");
+            cont=aux2;
+            intentos++;
+        }
+        if(aux2==8){
+            JOptionPane.showMessageDialog(null,"Ha ganado en este numero de Intentos: " + intentos);
+            intentos=0;
+            temp=0;
+            cont=0;
+            aux2=0;
+            for(int i=0;i<13;i++){
+                posiciones[i]=-1;
+            }
         }
         System.out.println("click");
     }
